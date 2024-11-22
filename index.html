@@ -5,34 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Araba İbresi Animasyonu</title>
   <style>
+    /* Genel Stil */
     body {
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       margin: 0;
-      background: #1e272e;
-      color: white;
+      background: linear-gradient(-45deg, #1e3c72, #2a5298, #b6fbff, #003973);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
       font-family: Arial, sans-serif;
+      color: white;
     }
 
+    /* Hareketli Arka Plan */
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Hız Göstergesi */
     .gauge {
       position: relative;
-      width: 200px;
-      height: 100px;
+      width: 300px;
+      height: 150px;
       border: 10px solid #fff;
       border-bottom: none;
       border-radius: 100px 100px 0 0;
       overflow: hidden;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
     }
 
     .gauge:before {
       content: '';
       position: absolute;
-      top: 90px;
-      left: 90px;
-      width: 20px;
-      height: 20px;
+      top: 135px;
+      left: 135px;
+      width: 30px;
+      height: 30px;
       background: #fff;
       border-radius: 50%;
       z-index: 10;
@@ -40,14 +52,15 @@
 
     .needle {
       position: absolute;
-      width: 6px;
-      height: 100px;
+      width: 8px;
+      height: 150px;
       background: red;
       top: 50%;
       left: 50%;
       transform-origin: bottom center;
       transform: rotate(-90deg);
-      animation: move-needle 2s infinite alternate ease-in-out;
+      animation: move-needle 3s infinite ease-in-out;
+      box-shadow: 0 0 10px red;
     }
 
     @keyframes move-needle {
@@ -72,17 +85,49 @@
 
     .tick {
       position: absolute;
-      width: 2px;
-      height: 20px;
+      width: 4px;
+      height: 25px;
       background: #fff;
       transform-origin: bottom center;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
     }
 
-    .tick:nth-child(1) { transform: rotate(-90deg) translateX(-100px); }
-    .tick:nth-child(2) { transform: rotate(-45deg) translateX(-100px); }
-    .tick:nth-child(3) { transform: rotate(0deg) translateX(-100px); }
-    .tick:nth-child(4) { transform: rotate(45deg) translateX(-100px); }
-    .tick:nth-child(5) { transform: rotate(90deg) translateX(-100px); }
+    .tick:nth-child(1) { transform: rotate(-90deg) translateX(-150px); }
+    .tick:nth-child(2) { transform: rotate(-60deg) translateX(-150px); }
+    .tick:nth-child(3) { transform: rotate(-30deg) translateX(-150px); }
+    .tick:nth-child(4) { transform: rotate(0deg) translateX(-150px); }
+    .tick:nth-child(5) { transform: rotate(30deg) translateX(-150px); }
+    .tick:nth-child(6) { transform: rotate(60deg) translateX(-150px); }
+    .tick:nth-child(7) { transform: rotate(90deg) translateX(-150px); }
+
+    /* Hız Değerleri */
+    .speed-labels {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      font-size: 14px;
+      pointer-events: none;
+    }
+
+    .speed-label {
+      position: absolute;
+      color: #fff;
+      font-weight: bold;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    }
+
+    .speed-label:nth-child(1) { transform: rotate(-90deg) translateX(-120px); }
+    .speed-label:nth-child(2) { transform: rotate(-60deg) translateX(-120px); }
+    .speed-label:nth-child(3) { transform: rotate(-30deg) translateX(-120px); }
+    .speed-label:nth-child(4) { transform: rotate(0deg) translateX(-120px); }
+    .speed-label:nth-child(5) { transform: rotate(30deg) translateX(-120px); }
+    .speed-label:nth-child(6) { transform: rotate(60deg) translateX(-120px); }
+    .speed-label:nth-child(7) { transform: rotate(90deg) translateX(-120px); }
   </style>
 </head>
 <body>
@@ -94,6 +139,17 @@
       <div class="tick"></div>
       <div class="tick"></div>
       <div class="tick"></div>
+      <div class="tick"></div>
+      <div class="tick"></div>
+    </div>
+    <div class="speed-labels">
+      <div class="speed-label">0</div>
+      <div class="speed-label">20</div>
+      <div class="speed-label">40</div>
+      <div class="speed-label">60</div>
+      <div class="speed-label">80</div>
+      <div class="speed-label">100</div>
+      <div class="speed-label">120</div>
     </div>
   </div>
 </body>
