@@ -3,65 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Koşan Filler</title>
+  <title>Uçan Uçaklar</title>
   <style>
     body {
       margin: 0;
       overflow: hidden;
-      background: linear-gradient(to bottom, #87CEEB, #2E8B57); /* Gökyüzü ve çim */
+      background: linear-gradient(to bottom, #87CEEB, #ffffff); /* Gökyüzü efekti */
     }
 
-    .ground {
+    .airplane {
       position: absolute;
-      bottom: 0;
-      width: 100%;
-      height: 50px;
-      background: #654321; /* Zemin rengi */
-    }
-
-    .elephant {
-      position: absolute;
-      bottom: 50px;
-      width: 100px;
+      width: 120px;
       height: auto;
-      animation: runAcross 8s linear infinite;
+      animation: flyAcross 10s linear infinite;
     }
 
-    @keyframes runAcross {
+    @keyframes flyAcross {
       0% {
         left: -150px;
+        transform: rotate(0deg);
       }
       100% {
         left: 100vw;
+        transform: rotate(5deg); /* Hafif eğim */
       }
     }
   </style>
 </head>
 <body>
-  <div class="ground"></div>
   <script>
-    const elephantImages = [
-      "https://upload.wikimedia.org/wikipedia/commons/7/70/Walking_elephant.gif", // Koşan fil gif'i
-      "https://upload.wikimedia.org/wikipedia/commons/7/70/Walking_elephant.gif", // İkinci aynı görsel
+    const airplaneImages = [
+      "https://upload.wikimedia.org/wikipedia/commons/a/a8/Embraer_E190-E2_%28cropped%29.png", // Birinci uçak
+      "https://upload.wikimedia.org/wikipedia/commons/1/10/Airbus_A320_Air_New_Zealand.png", // İkinci uçak
+      "https://upload.wikimedia.org/wikipedia/commons/6/6b/Boeing_747_Air_New_Zealand_%28cropped%29.png" // Üçüncü uçak
     ];
 
-    function createElephant() {
-      const elephant = document.createElement('img');
-      elephant.src = elephantImages[Math.floor(Math.random() * elephantImages.length)];
-      elephant.className = 'elephant';
-      elephant.style.left = '-150px'; // Başlangıç konumu
-      elephant.style.bottom = `${Math.random() * 200 + 50}px`; // Yerden rastgele yükseklik
-      elephant.style.animationDuration = `${Math.random() * 3 + 5}s`; // Rastgele hız
-      document.body.appendChild(elephant);
+    function createAirplane() {
+      const airplane = document.createElement('img');
+      airplane.src = airplaneImages[Math.floor(Math.random() * airplaneImages.length)];
+      airplane.className = 'airplane';
+      airplane.style.left = '-150px'; // Başlangıç pozisyonu
+      airplane.style.top = `${Math.random() * window.innerHeight * 0.8}px`; // Rastgele yükseklik
+      airplane.style.animationDuration = `${Math.random() * 5 + 5}s`; // Rastgele hız
+      document.body.appendChild(airplane);
 
-      // Fil ekrandan çıktığında DOM'dan kaldır
-      elephant.addEventListener('animationend', () => {
-        elephant.remove();
+      // Uçak ekrandan çıkınca DOM'dan kaldır
+      airplane.addEventListener('animationend', () => {
+        airplane.remove();
       });
     }
 
-    // Her 2 saniyede bir yeni fil oluştur
-    setInterval(createElephant, 2000);
+    // Her 1.5 saniyede bir yeni uçak oluştur
+    setInterval(createAirplane, 1500);
   </script>
 </body>
 </html>
